@@ -5,7 +5,7 @@ import "clean-artchit/internal/domain/model"
 type ServiceStore interface {
 	GetStore() (model.Store, error) // фильтры подумать
 	GetByIDStore(id string) (model.Store, error)
-	GetStores() ([]model.Product, error)
+	GetStores() ([]model.Store, error)
 	CreateStore(product *model.Store) error
 	UpdateStore(product *model.Store) error
 	DeleteStore(product *model.Store) error
