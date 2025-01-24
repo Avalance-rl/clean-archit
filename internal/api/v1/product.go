@@ -2,13 +2,15 @@ package v1
 
 import "C"
 import (
+	"context"
+	"encoding/json"
+	"net/http"
+
 	"clean-artchit/internal/api/dto"
 	"clean-artchit/internal/domain/entity"
 	usecaseProduct "clean-artchit/internal/domain/usecase/product"
-	"context"
-	"encoding/json"
+
 	"go.uber.org/zap"
-	"net/http"
 )
 
 type ProductUsecase interface {

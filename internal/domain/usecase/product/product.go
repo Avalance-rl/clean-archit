@@ -1,8 +1,10 @@
 package product
 
 import (
-	"clean-artchit/internal/domain/entity"
 	"context"
+
+	"clean-artchit/internal/domain/entity"
+
 	"go.uber.org/zap"
 )
 
@@ -16,13 +18,13 @@ type Service interface {
 
 // StoreService тут могут быть другие интерфейсы, которые используются
 type StoreService interface {
-	//GetByID(ctx context.Context, id string) entity.Author
+	// GetByID(ctx context.Context, id string) entity.Author
 }
 
 type productUsecase struct {
 	productService Service
-	//authorService AuthorService
-	//genreService  GenreService
+	// authorService AuthorService
+	// genreService  GenreService
 	log *zap.Logger
 }
 

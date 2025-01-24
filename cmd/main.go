@@ -1,17 +1,19 @@
 package main
 
 import (
+	"context"
+	"errors"
+	"net/http"
+
 	"clean-artchit/internal/apater/repository/pgx"
 	api_v1 "clean-artchit/internal/api/v1"
 	"clean-artchit/internal/config"
 	"clean-artchit/internal/domain/service"
 	"clean-artchit/internal/domain/usecase/product"
 	"clean-artchit/pkg/logger"
-	"context"
-	"errors"
+
 	"github.com/jackc/pgx/v5/pgxpool"
 	"go.uber.org/zap"
-	"net/http"
 )
 
 func main() {

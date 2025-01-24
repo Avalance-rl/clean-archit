@@ -2,10 +2,11 @@ package config
 
 import (
 	"fmt"
-	"github.com/ilyakaznacheev/cleanenv"
 	"net"
 	"os"
 	"sync"
+
+	"github.com/ilyakaznacheev/cleanenv"
 )
 
 var (
@@ -45,6 +46,7 @@ func GetConfig() *Config {
 	})
 	return configInstance
 }
+
 func (c *Config) mustLoad() {
 	path := os.Getenv("CONFIG_PATH")
 	if path == "" {
@@ -57,6 +59,7 @@ func (c *Config) mustLoad() {
 		panic("failed to read config: " + err.Error())
 	}
 }
+
 func (c *Config) BuildPostgresDns() string {
 	return fmt.Sprintf(
 		"host=%s port=%s sslmode=%s user=%s password=%s dbname=%s",
