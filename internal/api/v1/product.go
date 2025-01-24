@@ -2,6 +2,7 @@ package v1
 
 import "C"
 import (
+	"clean-artchit/pkg/logger"
 	"context"
 	"encoding/json"
 	"net/http"
@@ -9,8 +10,6 @@ import (
 	"clean-artchit/internal/api/dto"
 	"clean-artchit/internal/domain/entity"
 	usecaseProduct "clean-artchit/internal/domain/usecase/product"
-
-	"go.uber.org/zap"
 )
 
 type ProductUsecase interface {
@@ -20,10 +19,10 @@ type ProductUsecase interface {
 
 type productHandler struct {
 	productUsecase ProductUsecase
-	log            *zap.Logger
+	log            *logger.Logger
 }
 
-func NewProductHandler(productUsecase ProductUsecase, log *zap.Logger) *productHandler {
+func NewProductHandler(productUsecase ProductUsecase, log *logger.Logger) *productHandler {
 	return &productHandler{
 		productUsecase: productUsecase,
 		log:            log,

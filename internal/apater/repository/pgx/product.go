@@ -1,21 +1,21 @@
 package pgx
 
 import (
+	"clean-artchit/pkg/logger"
 	"context"
 
 	"clean-artchit/internal/domain/entity"
 
 	"github.com/jackc/pgx/v5/pgxpool"
-	"go.uber.org/zap"
 )
 
 // оперирует entity принимает и возвращает
 type productRepository struct {
 	db  *pgxpool.Pool
-	log *zap.Logger
+	log *logger.Logger
 }
 
-func NewProductRepository(db *pgxpool.Pool, log *zap.Logger) *productRepository {
+func NewProductRepository(db *pgxpool.Pool, log *logger.Logger) *productRepository {
 	return &productRepository{
 		db:  db,
 		log: log,

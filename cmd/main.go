@@ -17,7 +17,7 @@ import (
 )
 
 func main() {
-	log := logger.InitLogger()
+	log := logger.GetLogger()
 	defer log.Sync()
 
 	ctx := context.Background()

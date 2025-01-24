@@ -1,12 +1,11 @@
 package service
 
 import (
+	"clean-artchit/pkg/logger"
 	"context"
 
 	"clean-artchit/internal/domain/entity"
 	"clean-artchit/internal/domain/usecase/product"
-
-	"go.uber.org/zap"
 )
 
 // Сервисы оперируют доменной сущностью
@@ -22,10 +21,10 @@ type ProductRepository interface {
 
 type productService struct {
 	repository ProductRepository
-	log        *zap.Logger
+	log        *logger.Logger
 }
 
-func NewProductService(repository ProductRepository, log *zap.Logger) *productService {
+func NewProductService(repository ProductRepository, log *logger.Logger) *productService {
 	return &productService{
 		repository: repository,
 		log:        log,

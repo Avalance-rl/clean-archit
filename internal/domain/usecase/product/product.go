@@ -1,6 +1,7 @@
 package product
 
 import (
+	"clean-artchit/pkg/logger"
 	"context"
 
 	"clean-artchit/internal/domain/entity"
@@ -25,10 +26,10 @@ type productUsecase struct {
 	productService Service
 	// authorService AuthorService
 	// genreService  GenreService
-	log *zap.Logger
+	log *logger.Logger
 }
 
-func NewProductUsecase(productService Service, log *zap.Logger) *productUsecase {
+func NewProductUsecase(productService Service, log *logger.Logger) *productUsecase {
 	return &productUsecase{
 		productService: productService,
 		log:            log,
