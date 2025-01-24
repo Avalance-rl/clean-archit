@@ -4,16 +4,19 @@ import (
 	"clean-artchit/internal/domain/entity"
 	"context"
 	"github.com/jackc/pgx/v5/pgxpool"
+	"go.uber.org/zap"
 )
 
 // оперирует entity принимает и возвращает
 type productRepository struct {
-	db *pgxpool.Pool
+	db  *pgxpool.Pool
+	log *zap.Logger
 }
 
-func NewProductRepository(db *pgxpool.Pool) *productRepository {
+func NewProductRepository(db *pgxpool.Pool, log *zap.Logger) *productRepository {
 	return &productRepository{
-		db: db,
+		db:  db,
+		log: log,
 	}
 }
 
@@ -25,11 +28,11 @@ func (pr *productRepository) GetAll(ctx context.Context) ([]entity.Product, erro
 	panic("implement me")
 }
 
-func (pr *productRepository) Create(ctx context.Context, product *entity.Product) error {
+func (pr *productRepository) Create(ctx context.Context, product entity.Product) error {
 	panic("implement me")
 }
 
-func (pr *productRepository) Update(ctx context.Context, product *entity.Product) error {
+func (pr *productRepository) Update(ctx context.Context, product entity.Product) error {
 	panic("implement me")
 }
 

@@ -3,6 +3,7 @@ package product
 import (
 	"clean-artchit/internal/domain/entity"
 	"context"
+	"go.uber.org/zap"
 )
 
 // бизнес сценарии системы
@@ -22,10 +23,14 @@ type productUsecase struct {
 	productService Service
 	//authorService AuthorService
 	//genreService  GenreService
+	log *zap.Logger
 }
 
-func NewProductUsecase(productService Service) *productUsecase {
-	return &productUsecase{productService: productService}
+func NewProductUsecase(productService Service, log *zap.Logger) *productUsecase {
+	return &productUsecase{
+		productService: productService,
+		log:            log,
+	}
 }
 
 func (uc *productUsecase) GetProductByID(ctx context.Context, id string) (entity.Product, error) {

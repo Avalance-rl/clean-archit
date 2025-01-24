@@ -4,6 +4,7 @@ import (
 	"clean-artchit/internal/domain/entity"
 	"clean-artchit/internal/domain/usecase/product"
 	"context"
+	"go.uber.org/zap"
 )
 
 // Сервисы оперируют доменной сущностью
@@ -18,10 +19,14 @@ type ProductRepository interface {
 
 type productService struct {
 	repository ProductRepository
+	log        *zap.Logger
 }
 
-func NewService(repository ProductRepository) *productService {
-	return &productService{repository: repository}
+func NewProductService(repository ProductRepository, log *zap.Logger) *productService {
+	return &productService{
+		repository: repository,
+		log:        log,
+	}
 }
 
 func (s *productService) GetProductByID(ctx context.Context, id string) (entity.Product, error) {

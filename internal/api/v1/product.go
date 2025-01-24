@@ -2,11 +2,12 @@ package v1
 
 import "C"
 import (
-	"clean-artchit/internal/apater/api/dto"
+	"clean-artchit/internal/api/dto"
 	"clean-artchit/internal/domain/entity"
 	usecaseProduct "clean-artchit/internal/domain/usecase/product"
 	"context"
 	"encoding/json"
+	"go.uber.org/zap"
 	"net/http"
 )
 
@@ -17,10 +18,14 @@ type ProductUsecase interface {
 
 type productHandler struct {
 	productUsecase ProductUsecase
+	log            *zap.Logger
 }
 
-func NewHandler(productUsecase ProductUsecase) *productHandler {
-	return &productHandler{productUsecase: productUsecase}
+func NewProductHandler(productUsecase ProductUsecase, log *zap.Logger) *productHandler {
+	return &productHandler{
+		productUsecase: productUsecase,
+		log:            log,
+	}
 }
 
 func (h *productHandler) RegisterRoutes(mux *http.ServeMux) {
