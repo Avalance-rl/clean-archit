@@ -4,15 +4,34 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"os"
+	"sync"
 )
 
-func InitLogger() *zap.Logger {
+type Logger struct {
+	*zap.Logger
+}
+
+var (
+	logger *Logger
+	once   sync.Once
+)
+
+// GetLogger возвращает единственный экземпляр Logger
+func GetLogger() *Logger {
+	once.Do(func() {
+		logger = initLogger()
+	})
+	return logger
+}
+
+// initLogger инициализирует Logger с заданной конфигурацией
+func initLogger() *Logger {
 	config := zap.NewProductionConfig()
+
 	config.OutputPaths = []string{
 		"logs/application.log",
 		"stderr",
 	}
-
 	config.ErrorOutputPaths = []string{
 		"logs/error.log",
 		"stderr",
@@ -26,10 +45,10 @@ func InitLogger() *zap.Logger {
 		config.Level = zap.NewAtomicLevelAt(level)
 	}
 
-	l, err := config.Build()
+	log, err := config.Build()
 	if err != nil {
-		panic(err)
+		panic("failed to build logger: " + err.Error())
 	}
 
-	return l
+	return &Logger{Logger: log}
 }

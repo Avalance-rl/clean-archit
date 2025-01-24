@@ -8,6 +8,7 @@ import (
 )
 
 // Сервисы оперируют доменной сущностью
+// Работает с нужными репозиториями
 
 type ProductRepository interface {
 	GetOne(ctx context.Context, id string) (entity.Product, error)

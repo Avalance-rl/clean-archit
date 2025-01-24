@@ -48,5 +48,14 @@ func (uc *productUsecase) CreateProduct(ctx context.Context, product CreateProdu
 		Price:       product.Price,
 		InStock:     product.InStock,
 	}
-	return uc.productService.CreateProduct(ctx, productEntity)
+
+	createdProduct, err := uc.productService.CreateProduct(ctx, productEntity)
+	if err != nil {
+		uc.log.Error("failed to create product", zap.Error(err))
+		return entity.Product{}, err
+	}
+
+	uc.log.Info("product successfully created", zap.String("id", createdProduct.ID))
+
+	return createdProduct, nil
 }

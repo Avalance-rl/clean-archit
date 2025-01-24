@@ -7,3 +7,7 @@ type Product struct {
 	Price       float64 `json:"price"`
 	InStock     bool    `json:"in_stock"`
 }
+
+func (p *Product) IsStock() bool {
+	return p.InStock
+}
