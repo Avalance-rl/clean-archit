@@ -1,6 +1,7 @@
 package main
 
 import (
+	"clean-artchit/internal/api/v1/middleware"
 	"context"
 	"errors"
 	"net/http"
@@ -37,9 +38,18 @@ func main() {
 	productHandler.RegisterRoutes(mux)
 
 	addr := cfg.BuildServerAddress()
+	stack := middleware.CreateStack(
+		middleware.Logging,
+		middleware.AllowCors,
+	)
+
+	// добавляет версию при запросах
+	v1 := http.NewServeMux()
+	v1.Handle("/v1/", http.StripPrefix("/v1", mux))
+
 	server := &http.Server{
 		Addr:    addr,
-		Handler: mux,
+		Handler: stack(mux),
 	}
 
 	log.Info("Server starting", zap.String("address", addr))
